@@ -259,30 +259,29 @@ public class GuestDashboardView {
             showAlert("Error", ex.getMessage());
         }
     }
-
-    private void cancelReservation() {
-        Reservation selected = reservationTable.getSelectionModel().getSelectedItem();
-        if (selected == null) {
-            showAlert("Error", "Please select a reservation to cancel");
-            return;
-        }
-
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Confirm Cancellation");
-        confirm.setContentText("Are you sure you want to cancel this reservation?");
-        
-        if (confirm.showAndWait().get() == ButtonType.OK) {
-            try {
-                controller.cancelReservation(selected.getReservationId());
-                showAlert("Success", "Reservation cancelled successfully");
-                loadReservations();
-                roomComboBox.setItems(controller.getAvailableRooms());
-            } catch (Exception ex) {
-                showAlert("Error", ex.getMessage());
-            }
-        }
+private void cancelReservation() {
+    Reservation selected = reservationTable.getSelectionModel().getSelectedItem();
+    if (selected == null) {
+        showAlert("Error", "Please select a reservation to cancel");
+        return;
     }
 
+    Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+    confirm.setTitle("Confirm Cancellation");
+    confirm.setContentText("Are you sure you want to cancel this reservation?");
+    
+    if (confirm.showAndWait().get() == ButtonType.OK) {
+        try {
+            controller.cancelReservation(selected.getReservationId());
+            showAlert("Success", "Reservation cancelled successfully");
+            loadReservations();  // ← REFRESHES THE TABLE
+            roomComboBox.setItems(controller.getAvailableRooms());  // ← UPDATES AVAILABLE ROOMS
+        } catch (Exception ex) {
+            showAlert("Error", ex.getMessage());
+        }
+    }
+}
+   
     private void showAlert(String title, String content) {
         Alert alert = new Alert(
             title.equals("Error") ? Alert.AlertType.ERROR : Alert.AlertType.INFORMATION
