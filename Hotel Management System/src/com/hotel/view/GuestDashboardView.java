@@ -218,7 +218,8 @@ public class GuestDashboardView {
     }
 
     private void loadReservations() {
-        reservationTable.setItems(controller.getCurrentUserReservations());
+    reservationTable.setItems(controller.getCurrentUserReservations());
+}
     }
 
     private void bookRoom() {
