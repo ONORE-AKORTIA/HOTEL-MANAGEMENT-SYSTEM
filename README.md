@@ -417,7 +417,7 @@ For any questions or feedback, please contact:
 
 
 
-Email: \\\\\\\\\\\\\\\[Your Email Address]
+Email: akortiaonore@gmail.com
 
 
 
